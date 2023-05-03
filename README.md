@@ -42,6 +42,7 @@ In your clipboard, it will give you:
 In your clipboard! Note that it also:
 * maintains indentation (only spaces are supported for indentation).
 * removes duplicate keys
+* Aligns the assignment operators (equal signs) by adding extra spaces to there left
 
 ### Binaries
 
