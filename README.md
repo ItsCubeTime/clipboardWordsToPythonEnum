@@ -28,6 +28,7 @@ Alternatively if you have:
     Sissor =          'Sissor'
   Fork                =           "Fork"
     Glass  =  'half empty'
+    Glass    =        'half full'
 ```
 
 In your clipboard, it will give you:
