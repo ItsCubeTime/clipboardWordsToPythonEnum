@@ -58,6 +58,21 @@ except:
 
 returnVal = ''
 inputStr = clipboard.paste()
+
+valueArea = False
+newInputStr = ''
+for char in inputStr:
+    if char in ['"', "'"]:
+        valueArea = not valueArea
+        continue
+    if valueArea:
+        newInputStr += char.replace(' ', '&&_#&space')
+    else:
+        appendChar = char
+        if char == '=':
+            appendChar = f' {appendChar} '
+        newInputStr += appendChar
+inputStr = newInputStr
 indentation = ''
 for char in inputStr:
     if char == ' ':
@@ -68,21 +83,45 @@ inputStr = inputStr.replace('\n', ' ').replace('\r', ' ').replace('	', ' ') # Re
 while '  ' in inputStr:
     inputStr = inputStr.replace('  ', ' ')
 
-inputStr = inputStr.replace("'", '').replace('"','')
+# inputStr = inputStr.replace("'", '').replace('"','')
 
 inputList = inputStr.split(' ')
-while '=' in inputList:
-    inputList.remove('=')
+# while '=' in inputList:
+#     inputList.remove('=')
 while '' in inputList:
     inputList.remove('')
-inputList = list(set(inputList))
+
+# from typing import OrderedDict
+# inputList = list(dict.fromkeys(inputList))
 
 longestWordLen = 1
+i = -1
 for word in inputList:
+    i += 1
+    if i > 0:
+        if inputList[i-1] == '=':
+            continue
+    print(word)
     longestWordLen = max(longestWordLen, len(word))
+i = -1
+numberOfSkips = 0
+addedKeys = []
 for word in inputList:
+    # print(word)
+    i += 1
+    if numberOfSkips > 0:
+        numberOfSkips -= 1
+        continue
+    value = word
+    if len(inputList) > i+1:
+        if inputList[i+1] == '=':
+            value = inputList[i+2].replace('"', '').replace("'", '').replace('&&_#&space', ' ')
+            numberOfSkips = 2
+    if word in addedKeys:
+        continue
     spacingStr = ''
     while len(word + spacingStr) < longestWordLen:
         spacingStr += ' '
-    returnVal += f"""{indentation}{word}{spacingStr} = '{word}'\n"""
+    returnVal += f"""{indentation}{word}{spacingStr} = '{value}'\n"""
+    addedKeys.append(word)
 clipboard.copy(returnVal)
