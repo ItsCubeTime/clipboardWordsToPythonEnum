@@ -1,5 +1,11 @@
 # clipboardWordsToPythonEnum
 
+
+
+https://user-images.githubusercontent.com/20190653/235925917-e07bae3f-a31f-42d7-a58d-2fe2a30bf328.mp4
+
+
+
 A simple Python program that takes something like:
 
 ```
