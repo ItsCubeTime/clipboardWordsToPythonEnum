@@ -83,16 +83,11 @@ inputStr = inputStr.replace('\n', ' ').replace('\r', ' ').replace('	', ' ') # Re
 while '  ' in inputStr:
     inputStr = inputStr.replace('  ', ' ')
 
-# inputStr = inputStr.replace("'", '').replace('"','')
 
 inputList = inputStr.split(' ')
-# while '=' in inputList:
-#     inputList.remove('=')
 while '' in inputList:
     inputList.remove('')
 
-# from typing import OrderedDict
-# inputList = list(dict.fromkeys(inputList))
 
 longestWordLen = 1
 i = -1
@@ -107,7 +102,6 @@ i = -1
 numberOfSkips = 0
 addedKeys = []
 for word in inputList:
-    # print(word)
     i += 1
     if numberOfSkips > 0:
         numberOfSkips -= 1
